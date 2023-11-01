@@ -1,0 +1,13 @@
+.bold{
+    text-transform: uppercase;
+}
+#rightcol{
+text-align: right;
+}
+.body{
+   text-align: center;
+   text-decoration: solid;
+}
+.leftcol{
+    text-align: left;
+}
