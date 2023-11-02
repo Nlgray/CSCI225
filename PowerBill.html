@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<link rel="stylesheet" href="css/PowerBill.css">
+
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col" id="LeftCol">
+                <div class="body">
+
+                    <h1>
+                        Georgia Power Bill Calculator
+                    </h1>
+
+                    <p>
+                        The utility bill calculator is a resource that the Commision is making available that allows a
+                        consumer
+                        to check the accuracy of his/her monthly electric bill.
+                        A bill calculator has been prepared for customers of the Georgia Power Company.
+                        This bill calculator applies only to residential customers who are receiving service under the
+                        standard
+                        Residential Tariff (R-27).
+                        For more details regarding Georgia Power's Residential tarrif offerings, please visit Georgia
+                        Power
+                        Pricing & Rates.
+                    </p>
+                    <p id="bold">Effective August 2023</p>
+                </div>
+                <div class="calulation">
+
+                    <p class="inC1">Enter your Montly Usage in kilowatt hours (kWh):</p>
+                    <p class="inc2"><input type="number" class="form-control" id="monthlyUsage" inputmode="numeric"></p>
+                    <p class="inc1">Enter the number of days for your current billing period:</p>
+                    <p class="inc2"><input type="number" class="form-control" id="daysOfBillingPeriod"
+                            inputmode="numeric"></p>
+                    <p class="inc1">Is your residence INSIDE the city limits of your city?</p>
+                    <p class="inc2"><input type="checkbox" class="form-check-input" id="CityLimits"></p>
+                    <p class="inc1">Is this a Summer month (June-September)?</p>
+                    <p class="inc2"><input type="checkbox" class="form-check-input" id="season"></p>
+                    <p class="inc1">Enter Sales Tax(%):</p>
+                    <p class="inc2"><input type="number" class="form-control" id="salesTax" inputmode="numeric"></p>
+                    <div class="form-group">
+                        <input type="button" class="btn btn-primary" id="submitBtn" value="Submit">
+                        <input type="reset" class="btn btn-primary" id="resetBtn" value="Reset">
+
+
+                        <div class="col" id="rightCol">
+                            <div class="details">
+                                <h1>Details of your bill</h1>
+                                <table>
+                                    <tr>
+                                        <td class="bold">Items</td>
+                                        <td class="bold">Fees</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Base Charge:</td>
+                                        <td id="baseCharge">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tier 1 Component (kWh):</td>
+                                        <td id="tier1">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tier 2 Component (kWh):</td>
+                                        <td id="tier2">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tier 3 Component (kWh):</td>
+                                        <td id="tier3">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bold">Base Revenue -- Base Bill Subtotal:</td>
+                                        <td id="baseRev">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fuel Cost Rider:</td>
+                                        <td id="fuelCost">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Demand Side Management Residential Rider:</td>
+                                        <td id="demandSide">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nuclear Construction Cost Recovery Rider:</td>
+                                        <td id="nuclearConstruction">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Environmental Compliance Cost Recovery Rider:</td>
+                                        <td id="environmentalCompliance">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bold">Total Revenue -- Current Service Subtotal:</td>
+                                        <td id="totalRevenue">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Franchise Fee:</td>
+                                        <td id="franchiseFee">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bold">Total (excluding tax):</td>
+                                        <td id="totalWoTax">0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bold">Total (w/tax):</td>
+                                        <td id="totalWTax">0.00</td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+
+                        <script>
+                            function calculateBill() {
+
+                                var monthlyUsage = parseFloat(document.getElementById("monthlyUsage").value);
+                                var daysOfBillingPeriod = parseFloat(document.getElementById("daysOfBillingPeriod").value);
+                                var salesTax = parseFloat(document.getElementById("salesTax").value);
+                                var CityLimits = document.getElementById("CityLimits").checked;
+                                var summer = document.getElementById("season").checked;
+                                var baseCharge = (daysOfBillingPeriod * 0.4603)
+                                document.getElementById("baseCharge").innerHTML = baseCharge.toFixed(2);
+
+                                // Tier 1,2,3
+                                var t1Charge = 0;
+                                var t2Charge = 0;
+                                var t3Charge = 0;
+                                if (summer) {
+                                    if (monthlyUsage <= 650) {
+                                        t1Charge = monthlyUsage * 0.066678;
+                                    } else if (monthlyUsage <= 1000) {
+                                        t1Charge = 650 * 0.066678;
+                                        t2Charge = ((monthlyUsage - 650) * 0.110748);
+                                    } else {
+                                        console.log("here");
+                                        t1Charge = 650 * 0.066678;
+                                        t2Charge = 350 * 0.110748;
+                                        t3Charge = ((monthlyUsage - 1000) * 0.114625);
+                                    }
+                                } else {
+                                    if (monthlyUsage <= 650) {
+                                        t1Charge = monthlyUsage * 0.062404;
+                                    } else if (monthlyUsage <= 1000) {
+                                        t1Charge = 650 * 0.062404;
+                                        t2Charge = ((monthlyUsage - 650) * 0.062404);
+                                    } else {
+                                        console.log("here");
+                                        t1Charge = 650 * 0.062404;
+                                        t2Charge = 350 * 0.062404;
+                                        t3Charge = ((monthlyUsage - 1000) * 0.062404);
+                                    }
+                                }
+                                document.getElementById("tier1").innerHTML = t1Charge.toFixed(2);
+                                document.getElementById("tier2").innerHTML = t2Charge.toFixed(2);
+                                document.getElementById("tier3").innerHTML = t3Charge.toFixed(2);
+
+                                var baseRevenue = baseCharge + t1Charge + t2Charge + t3Charge;
+                                document.getElementById("baseRev").innerHTML = baseRevenue.toFixed(2);
+
+                                var fuelCost = 0;
+                                if (summer) {
+                                    fuelCost = monthlyUsage * 0.045876;
+                                } else {
+                                    fuelCost = monthlyUsage * 0.042859;
+                                }
+                                document.getElementById("fuelCost").innerHTML = fuelCost.toFixed(2);
+                                var demandSide = baseRevenue * 0.015989
+                                document.getElementById("demandSide").innerHTML = demandSide.toFixed(2);
+
+                                // Nuclear
+                                var nuclearConstruction = baseRevenue * 0.041562;
+                                document.getElementById("nuclearConstruction").innerHTML = nuclearConstruction.toFixed(2);
+
+                                // Environmental
+                                var environmentalCompliance = baseRevenue * 0.162813;
+                                document.getElementById("environmentalCompliance").innerHTML = environmentalCompliance.toFixed(2);
+
+                                var totalRevenue = baseRevenue + fuelCost + demandSide + nuclearConstruction + environmentalCompliance;
+                                document.getElementById("totalRevenue").innerHTML = totalRevenue.toFixed(2);
+
+                                // Fee
+                                var franchiseFee = 0;
+                                if (CityLimits) {
+                                    franchiseFee = totalRevenue * 0.030674;
+                                } else {
+                                    franchiseFee = totalRevenue * 0.011839;
+                                }
+                                document.getElementById("franchiseFee").innerHTML = franchiseFee.toFixed(2);
+
+                                // before tax
+                                var totalWoTax = totalRevenue + franchiseFee;
+                                document.getElementById("totalWoTax").innerHTML = totalWoTax.toFixed(2);
+
+                                // Total 
+                                var totalWTax = totalWoTax * (1 + (salesTax / 100));
+                                document.getElementById("totalWTax").innerHTML = totalWTax.toFixed(2);
+                                if (totalWTax > 500) {
+                                    open('https://www.georgiapower.com/residential/save-money-and-energy/products-programs.html')
+                                }
+                            }
+                            var btn = document.getElementById("submitBtn");
+                            btn.addEventListener("click", calculateBill, false);
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</body>
+
+</html>
