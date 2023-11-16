@@ -1,0 +1,52 @@
+
+body {
+    font-family: Georgia, 'Times New Roman', Times;
+    background-image: url(https://scontent-lga3-1.xx.fbcdn.net/v/t39.30808-6/306744191_178904571313775_5945360108801947487_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=-Qks4ihc6VgAX_c1FFG&_nc_ht=scontent-lga3-1.xx&oh=00_AfCSp4E2lk9ZBqheB_g0rm_7ZtXBX_O7Hm8NwiYOu0WBxA&oe=655B4F7E);
+    background-size: 100%;
+  
+}
+.navbar{
+    position: fixed;
+    top: 3%;
+    right: 3%;
+    width:30%;
+    display: flex;
+    text-align: center;
+    z-index: 2;
+    padding-right: 20% ;
+    padding-left: 2px; 
+    padding-right: 2px;
+    border: 5px solid palevioletred;
+    background-color: black;
+    font-size: 12pt;
+    font-weight: 100;
+}
+.calculator{
+padding-left: 10px;
+padding-right: 20px;
+padding-top: 20px;
+padding-bottom: 20px;
+position: fixed;
+border-left: 10px;
+border-right: 20px;
+background-color: whitesmoke;
+width: 20%;
+text-align: center;
+border: 10px black, dotted;
+
+
+}
+table{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 20px;
+    table-layout: white;
+    border-right: 10px;
+    border-left: 10px;
+    border: 10px white;
+    text-align: center;
+    background-color: white;
+    padding-bottom: 10px;
+    tr:hover {background-color: aqua;};
+
+}
